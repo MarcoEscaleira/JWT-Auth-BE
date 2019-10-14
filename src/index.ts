@@ -3,10 +3,11 @@ import "reflect-metadata";
 import express from 'express';
 import {ApolloServer} from "apollo-server-express";
 import {buildSchema} from "type-graphql";
-import {UserResolver} from "./UserResolver";
 import {createConnection} from "typeorm";
 import cookieParser from 'cookie-parser';
 import {verify} from "jsonwebtoken";
+import cors from 'cors';
+import {UserResolver} from "./resolvers/UserResolver";
 import {User} from "./entity/User";
 import {createAccessToken, createRefreshToken} from "./auth";
 import {sendRefreshToken} from "./sendRefreshToken";
@@ -14,6 +15,12 @@ import {sendRefreshToken} from "./sendRefreshToken";
 
 (async () => {
   const app = express();
+  
+  // CORS setup
+  app.use(cors({
+    origin: "http://localhost:3000",
+    credentials: true
+  }));
   
   // It parses our cookies to the req of our routes
   app.use(cookieParser());
@@ -65,7 +72,7 @@ import {sendRefreshToken} from "./sendRefreshToken";
     context: ({ req, res }) => ({ req, res })
   });
   
-  apolloServer.applyMiddleware({ app });
+  apolloServer.applyMiddleware({ app, cors: false });
   
   app.listen(4000, () => {
     console.log("express server started");
