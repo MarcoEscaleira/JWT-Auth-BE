@@ -1,7 +1,10 @@
 # JWT-Auth-BE
 The Back-End of a template JWT Authentication with typeORM | Graphql | Typescript
 
-The purpose is so anyone can use this template and right away start with a Authentication and not worry about it. This repo pairs up with the *FE* https://github.com/MarcoEscaleira/JWT-Auth-FE
+The purpose is so anyone can use this template and right away start with a Authentication and not worry about it.
+
+## *This repo pairs up with the FE*
+https://github.com/MarcoEscaleira/JWT-Auth-FE
 
 # Setup
 
